@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Stringable;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -15,6 +17,10 @@ class RegisterController extends Controller
     public function store(Request $request){
         
         // dd($request->get('username'));
+
+
+        //modifica el request
+        $request->request->add(['username' => Str::slug($request->username)]);
 
         //validacion
         $this->validate($request, [
@@ -31,8 +37,16 @@ class RegisterController extends Controller
             'password' => $request->password
         ]);
 
-        //redireccionar al usuario
+        //autenticar
+        auth()->attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
 
-        dd('Creando usuario');
+        //otra forma de autenticar
+        auth()->attempt($request->only('email', 'password'));
+
+        //redireccionar al usuario
+        return redirect()->route('posts.index', auth()->user()->username);
     }
 }
