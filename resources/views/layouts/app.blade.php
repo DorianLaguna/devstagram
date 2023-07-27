@@ -3,8 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Devstagram</title>
+        @stack('styles')
         @vite('resources/css/app.css')
+        @vite('resources/js/app.js')
+        <title>Devstagram</title>
 
         
     </head>
@@ -25,7 +27,7 @@
                             </svg>                              
                             Crear
                         </a>
-                        <a class="font-bold texte-gray-600 text-sm" href="#">Hola <span class="font-normal">{{ auth()->user()->username }} </span></a>
+                        <a class="font-bold texte-gray-600 text-sm" href="{{ route('posts.index', auth()->user()->username) }}">Hola <span class="font-normal">{{ auth()->user()->username }} </span></a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="font-bold texte-gray-600 text-sm">
