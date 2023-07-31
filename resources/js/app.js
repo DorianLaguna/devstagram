@@ -9,13 +9,10 @@ let myDropzone = new Dropzone("#dropzone",{
     maxFiles: 1,
     uploadMultiple: false
 });
-myDropzone.on("sending", (file, xhr,formData) => {
-  console.log(file);
-});
 
 myDropzone.on('success', function(file, response){
-  console.log(response);
+  document.querySelector('[name="imagen"]').value = response.imagen;
 })
-myDropzone.on('error', function(){
+myDropzone.on('removeedFile', function(){
     
 })
