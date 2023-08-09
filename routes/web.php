@@ -25,6 +25,10 @@ Route::get('/', function () {
     return view('principal');
 });
 
+//Rutas para perfil
+Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
+Route::post('/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
+
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);
 
@@ -48,6 +52,3 @@ Route::post('post/{post}/Likes', [LikeController::class, 'store'])->name('posts.
 
 Route::delete('post/{post}/Likes', [LikeController::class, 'destroy'])->name('posts.likes.destroy');
 
-//Rutas para perfil
-Route::get('{{user:username}}/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
-Route::post('{{user:username}}/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
