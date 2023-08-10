@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PerfilController extends Controller
 {
@@ -23,9 +25,30 @@ class PerfilController extends Controller
         $request->request->add(['username' => Str::slug($request->username)]);
 
         $this->validate($request, [
-            'username' => ['required','unique:users,username,'.auth()->user()->id,'min:3', 'max:20']
+            'username' => ['required','unique:users,username,'.auth()->user()->id,'min:3', 'max:20'],
+            'email' => 'email|required|unique:users,email,'.auth()->user()->id
         ]);
 
+        if($request->imagen){
+            $imagen = $request->file('imagen');
+
+            $nombreImagen = Str::uuid() . '.' . $imagen->extension();
+    
+            $imagenServidor = Image::make($imagen);
+            $imagenServidor->fit(1000,1000);
+    
+            $imagenPath = public_path('perfiles') . "/" . $nombreImagen;
+            $imagenServidor->save($imagenPath);
+        }
+
+        $usuario = User::find(auth()->user()->id);
+        
+        $usuario->username = $request->username;
+        $usuario->imagen = $nombreImagen ?? auth()->user()->imagen ?? '';
+        $usuario->email = $request->email ?? auth()->user()->email;
+        $usuario->save();
+
+        return redirect()->route('posts.index', $usuario->username);
 
     }
 }
