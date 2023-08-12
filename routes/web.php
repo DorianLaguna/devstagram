@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
@@ -20,10 +21,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('principal');
-});
 
 //Rutas para perfil
 Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
@@ -52,3 +49,6 @@ Route::post('post/{post}/Likes', [LikeController::class, 'store'])->name('posts.
 
 Route::delete('post/{post}/Likes', [LikeController::class, 'destroy'])->name('posts.likes.destroy');
 
+//Siguiendo Usuarios
+Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.follow');
+Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');
