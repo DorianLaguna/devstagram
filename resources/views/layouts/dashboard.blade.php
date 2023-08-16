@@ -10,7 +10,7 @@
             <div class="w-8/12 lg:6/12 px-5 ">
                 <img src="{{ $user->imagen ? asset('perfiles') . '/' . $user->imagen : asset('img/usuario.svg') }}" alt="Imagen usuario" class="rounded-md">
             </div>
-            <div class="md:w-8/12 lg:6/12 px-5 flex items-center md:items-start flex-col py-10 justify-center">
+            <div class="md:w-8/12 lg:6/12 px-5 flex items-center md:items-start flex-col pt-5 pb-3 justify-center">
                 <div class="flex text-center gap-2">
                     <p class="text-gray-700 text-2xl capitalize">{{ $user->username }} </p>
     
@@ -77,8 +77,9 @@
     </div>
 
     <section class="container mx-auto mt-10">
-        <h2 class="text-4xl text-center font-black my-10">Publicaciones</h2>
+        <h2 class="text-4xl text-center font-black my-3">Publicaciones</h2>
 
         <x-listar-post :posts="$posts" />
+
     </section>
 @endsection
