@@ -15,7 +15,7 @@ class ComentarioController extends Controller
         $this->validate($request,[
             'comentario' => 'required|max:255'    
         ]);
-
+ 
         //almacenar el resultado
         Comentario::create([
             'user_id' => auth()->user()->id,
