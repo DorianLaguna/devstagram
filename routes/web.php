@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuscarController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\HomeController;
@@ -24,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', HomeController::class)->name('home');
 
+//conocer a otros usuarios
+Route::get('/conocer', BuscarController::class)->name('conocer');
+
 //Rutas para perfil
 Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
 Route::post('/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
@@ -46,9 +50,9 @@ Route::post('/{user:username}/posts/{post}', [ComentarioController::class, 'stor
 Route::post('/imagenes',[ImagenController::class, 'store'])->name('imagenes.store');
 
 
+
 //like a las fotos
 Route::post('post/{post}/Likes', [LikeController::class, 'store'])->name('posts.likes.store');
-
 Route::delete('post/{post}/Likes', [LikeController::class, 'destroy'])->name('posts.likes.destroy');
 
 //Siguiendo Usuarios

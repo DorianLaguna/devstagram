@@ -5,6 +5,16 @@
 
 @section('contenido')
 
+    <div class="flex justify-center w-35 mx-auto">
+        <a href="{{route('conocer')}}" 
+            class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded sm:text-sm text-xs uppercase font-bold cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+                </svg>                                           
+            Conocer gente
+        </a>
+    </div>
+
     @if ($posts->count())
                 
         <div class="gap-4 flex flex-col justify-center max-w-lg p-3 mx-auto">
@@ -51,7 +61,7 @@
         </div>
 
     @else
-        <p class="text-gray-600 uppercase text-sm text-center font-bold">No hay posts</p>
+        <p class="text-gray-600 uppercase text-sm text-center font-bold mt-5">No hay posts que mostrar</p>
     @endif
         
 
