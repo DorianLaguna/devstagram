@@ -56,7 +56,7 @@
             @endforeach
         </div>
 
-        <div class="my-6">
+        <div class="my-6 ">
             {{ $posts->links('pagination::tailwind') }}
         </div>
 
